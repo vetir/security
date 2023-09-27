@@ -32,21 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                /**
-                 * Удалил из-за ненадобности в связи с аннотацией @PreAuthorization проставленной над методами
-                 * в контроллерах
-                 *
-                .antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(Permission.DEVELOPERS_READ.getPermission())
-                .antMatchers(HttpMethod.POST,"/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE,"/api/**").hasAuthority(Permission.DEVELOPERS_WRITE.getPermission())
-                 */
                 .anyRequest()
                 .authenticated()
                 .and()
-                /**
-                 * вместо Basic использую formLogin()
-                .httpBasic();
-                 */
                 .formLogin()
                 .loginPage("/auth/login").permitAll()
                 .defaultSuccessUrl("/auth/success")
